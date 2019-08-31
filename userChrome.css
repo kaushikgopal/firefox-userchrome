@@ -1,0 +1,141 @@
+
+
+/*  *******************************************
+ *  Show bookmarks toolbar only on new tabs
+ *
+ *  courtesy: https://www.reddit.com/r/FirefoxCSS/comments/7evwow/show_bookmarks_toolbar_only_on_new_tab/
+ *  ******************************************
+ */
+#main-window #PersonalToolbar
+{
+  visibility: collapse !important;
+  opacity:0 !important;
+  margin-top: -23px !important;
+/*    transition: all 0.2s ease 0.2s !important;  */
+}
+
+#main-window[title^="Mozilla Firefox"] #PersonalToolbar
+/* , #main-window[title^="about:newtab"] #PersonalToolbar */
+/* , #main-window[title^="New Tab"] #PersonalToolbar */
+/* , #main-window[title^="Firefox"] #PersonalToolbar */
+/* , #main-window[title^="Nightly"] #PersonalToolbar  */
+{
+  visibility: visible !important;
+  margin-top: 32px !important;
+/*   transition: all 0.2s ease 0.2s !important; */
+  opacity: 1 !important;
+  /* show bookmarks toolbar */
+  max-height: 32px !important;
+}
+
+
+
+/*  *******************************************
+ *  move bookmarks toolbar to bottom +
+ *  style bookmarks toolbar
+ *
+ *  courtesy: https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/userChrome.css
+ *  ******************************************
+ */
+:root {  --addonbar_height: 32px;   }
+
+
+#main-window:not([chromehidden*="toolbar"]) #navigator-toolbox > #PersonalToolbar {
+  -moz-window-dragging: no-drag;
+  display: block !important;
+  position: fixed !important;
+  bottom: 0px !important;
+  width: 100% !important;
+  height: var(--addonbar_height) !important;
+  -moz-padding-start: 1px !important;
+  -moz-padding-end: 1px !important;
+  border-top: 1px solid var(--toolbox-border-bottom-color) !important;
+}
+
+#PersonalToolbar > *  {
+  min-height: calc( var(--addonbar_height) - 3px); !important;
+}
+
+
+/*  *******************************************
+ *  Auto-hide the Navbar
+ *  ******************************************
+
+#nav-bar {
+    visibility: collapse;
+}
+
+:hover > #nav-bar
+, #nav-bar:focus-within
+, #main-window[title^="Mozilla Firefox"] #nav-bar
+{
+  visibility: visible !important;
+}
+ */
+
+/*  *******************************************
+ *  Theme tweaks
+ *  ******************************************
+ */
+
+
+#tabbrowser-tabs {
+/*   border-bottom: 5px solid red; */
+}
+
+/* #back-button,
+#forward-button,
+*/
+#home-button,
+#stop-button,
+#reload-button,
+.tab-close-button {
+    display: none !important;
+}
+
+
+#urlbar,
+.searchbar-textbox,
+#urlbar:hover,
+.searchbar-textbox:hover {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    -moz-appearance: none;
+    margin: 4px 0px !important;
+    min-height: 24px !important;
+}
+
+
+
+
+/* compacttheme.css is loaded in browser.xul after browser.css when it is
+   preffed on.  The bulk of the styling is here in the shared file, but
+   there are overrides for each platform in their compacttheme.css files. */
+
+:root:-moz-lwtheme {
+  --toolbar-non-lwt-bgcolor: var(--toolbar-bgcolor);
+  --toolbar-non-lwt-textcolor: var(--lwt-text-color);
+  --toolbar-non-lwt-bgimage: none;
+}
+
+:root:-moz-lwtheme-brighttext {
+  /* !important to override LightweightThemeManager.addBuiltInTheme in
+     BrowserGlue.jsm */
+  --autocomplete-popup-background: #2A2A2E !important;
+  --autocomplete-popup-highlight-background: #0060DF;
+}
+
+
+#TabsToolbar:-moz-lwtheme-darktext {
+  -moz-appearance: -moz-mac-vibrant-titlebar-light;
+  -moz-font-smoothing-background-color: -moz-mac-vibrant-titlebar-light;
+}
+
+.tabbrowser-tab[multiselected],
+.tabbrowser-tab[visuallyselected=true] {
+  -moz-font-smoothing-background-color: var(--toolbar-bgcolor);
+}
+
+
+
